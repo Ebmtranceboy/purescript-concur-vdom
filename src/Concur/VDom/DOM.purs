@@ -104,10 +104,58 @@ node' s = node s []
 
 -- Internal
 nodeBuilder :: String -> Array P.Prop -> HTML -> HTMLNode
-nodeBuilder s p c = mkHTMLNode $ D.Elem Nothing (D.ElemName s) p (unHTML c)
+nodeBuilder s ps c = mkHTMLNode $ D.Elem Nothing (D.ElemName s) ps (unHTML c)
 
 keyedNodeBuilder :: String → Array P.Prop -> Array (Tuple String HTMLNode) → HTMLNode
-keyedNodeBuilder s p c = mkHTMLNode $ D.Keyed Nothing (D.ElemName s) p (unKeyedHTML c)
+keyedNodeBuilder s ps c = mkHTMLNode $ D.Keyed Nothing (D.ElemName s) ps (unKeyedHTML c)
 
 thunkBuilder :: forall a. (a -> HTMLNode) -> a -> HTMLNode
 thunkBuilder render val = mkHTMLNode $ D.Widget $ Fn.runFn2 thunk1 render val
+
+
+div :: El
+div = node "div"
+
+div' :: El'
+div' = node' "div"
+
+div_ :: El1
+div_ = node_ "div"
+
+h2 :: El
+h2 = node "h2"
+
+h2_ :: El1
+h2_ = node_ "h2"
+
+p :: El
+p = node "p"
+
+p' :: El'
+p' = node' "p"
+
+label :: El
+label = node "label"
+
+label' :: El'
+label' = node' "label"
+
+pre :: El'
+pre = node' "pre"
+
+type Leaf m a = forall m a. MultiAlternative m => ShiftMap (Widget HTML) m => Array (Props P.Prop a) -> m a
+
+hr :: forall m a. Leaf m a
+hr ps = node "hr" ps []
+
+hr' :: forall m a. MultiAlternative m => ShiftMap (Widget HTML) m => m a
+hr' = hr []
+
+button :: El
+button = node "button"
+
+button' :: El'
+button' = node' "button"
+
+input :: forall m a. Leaf m a
+input ps = node "input" ps []
