@@ -23,7 +23,6 @@ handle s = Handler \f -> P.Handler (wrap s) (mkEffectFn1 f)
 prop :: forall a b. String -> a -> VDomProps b
 prop s v = PrimProp (P.Property s (P.propValue v))
 
-
 onClick :: Props P.Prop DOM.Event
 onClick = handle "click"
 
@@ -66,7 +65,7 @@ checked = prop "checked"
 dangerouslySetInnerHTML :: forall a. String -> Props P.Prop a
 dangerouslySetInnerHTML = prop "innerHTML"
 
--- | Construct a custom key value attr
-attr :: forall a. String -> String -> Props P.Prop a
+-- | Construct a custom key value attribute
+attr :: forall a. String -> String -> VDomProps a
 attr s v = PrimProp (P.Attribute Nothing s v)
 
