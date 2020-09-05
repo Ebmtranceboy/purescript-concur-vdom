@@ -12,6 +12,7 @@ import Web.DOM.Element (fromEventTarget, toNode)
 import Web.DOM.Node (textContent)
 import Effect.Unsafe (unsafePerformEffect)
 import Data.Maybe (Maybe(..), maybe)
+import Unsafe.Coerce (unsafeCoerce)
 
 type VDomProps a = Props P.Prop a
 
