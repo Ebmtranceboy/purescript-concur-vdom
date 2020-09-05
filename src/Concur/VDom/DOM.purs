@@ -169,6 +169,13 @@ label' = node' "label"
 pre :: El'
 pre = node' "pre"
 
+ul :: El
+ul = node "ul"
+
+li :: El
+li = node "li"
+
+
 type Leaf m a = forall m a. MultiAlternative m => ShiftMap (Widget HTML) m => Array (Props P.Prop a) -> m a
 
 hr :: forall m a. Leaf m a
