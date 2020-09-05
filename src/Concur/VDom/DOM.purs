@@ -151,6 +151,9 @@ em = node "em"
 b :: El
 b = node "b"
 
+br :: El
+br = node "br"
+
 p :: El
 p = node "p"
 
