@@ -78,6 +78,9 @@ value = prop "value"
 checked :: forall a. Boolean -> Props P.Prop a
 checked = prop "checked"
 
+autoFocus :: forall a. Boolean -> Props P.Prop a
+autoFocus = prop "autofocus"
+
 dangerouslySetInnerHTML :: forall a. String -> Props P.Prop a
 dangerouslySetInnerHTML = prop "innerHTML"
 
