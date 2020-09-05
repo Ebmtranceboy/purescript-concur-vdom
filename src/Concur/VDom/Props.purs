@@ -1,10 +1,17 @@
 module Concur.VDom.Props where
 
+import Prelude
+
 import Concur.Core.Props (Props(..))
 import Concur.VDom.Props.Internal as P
 import Data.Newtype (wrap)
 import Effect.Uncurried (mkEffectFn1)
 import Web.Event.Event as DOM
+import Web.HTML.HTMLInputElement (fromElement, value) as Input
+import Web.DOM.Element (fromEventTarget, toNode)
+import Web.DOM.Node (textContent)
+import Effect.Unsafe (unsafePerformEffect)
+import Data.Maybe (Maybe(..), maybe)
 
 type VDomProps a = Props P.Prop a
 
