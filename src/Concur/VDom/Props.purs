@@ -2,7 +2,7 @@ module Concur.VDom.Props where
 
 import Prelude
 
-import Concur.Core.Props (Props(..))
+import Concur.Core.Props (Props(..), filterProp)
 import Concur.VDom.Props.Internal as P
 import Data.Newtype (wrap)
 import Effect.Uncurried (mkEffectFn1)
@@ -40,6 +40,21 @@ onMouseDown = handle "mousedown"
 
 onMouseUp :: Props P.Prop DOM.Event
 onMouseUp = handle "mouseup"
+
+isEnterEvent :: DOM.Event -> Boolean
+isEnterEvent e = (unsafeCoerce e).keyCode == 13
+
+onKeyDown :: Props P.Prop DOM.Event
+onKeyDown = handle "keydown"
+
+onKeyPress :: Props P.Prop DOM.Event
+onKeyPress = handle "keypress"
+
+onKeyUp :: Props P.Prop DOM.Event
+onKeyUp = handle "keyup"
+
+onKeyEnter :: Props P.Prop DOM.Event
+onKeyEnter = filterProp isEnterEvent onKeyDown
 
 unsafeTargetValue :: DOM.Event -> String
 unsafeTargetValue ev = 
