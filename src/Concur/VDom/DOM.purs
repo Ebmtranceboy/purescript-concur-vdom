@@ -104,10 +104,10 @@ node' s = node s []
 
 -- Internal
 nodeBuilder :: String -> Array P.Prop -> HTML -> HTMLNode
-nodeBuilder s p c = mkHTMLNode $ D.Elem Nothing (D.ElemName s) p (unHTML c)
+nodeBuilder s prop c = mkHTMLNode $ D.Elem Nothing (D.ElemName s) prop (unHTML c)
 
 keyedNodeBuilder :: String → Array P.Prop -> Array (Tuple String HTMLNode) → HTMLNode
-keyedNodeBuilder s p c = mkHTMLNode $ D.Keyed Nothing (D.ElemName s) p (unKeyedHTML c)
+keyedNodeBuilder s prop c = mkHTMLNode $ D.Keyed Nothing (D.ElemName s) prop (unKeyedHTML c)
 
 thunkBuilder :: forall a. (a -> HTMLNode) -> a -> HTMLNode
 thunkBuilder render val = mkHTMLNode $ D.Widget $ Fn.runFn2 thunk1 render val
