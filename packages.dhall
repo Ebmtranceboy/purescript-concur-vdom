@@ -110,11 +110,7 @@ let mkPackage =
 
 let upstream =
       https://github.com/purescript/package-sets/releases/download/psc-0.13.8-20200909/packages.dhall sha256:b899488adf6f02a92bbaae88039935bbc61bcba4cf4462f6d915fc3d0e094604
-
-let overrides = { concur-react = ./spago.dhall as Location }
-
-let additions =
-      { concur-core =
+  with concur-core =
           mkPackage
             [ "aff"
             , "arrays"
@@ -128,6 +124,5 @@ let additions =
             ]
             "https://github.com/purescript-concur/purescript-concur-core"
             "v0.4.2"
-      }
 
 in  upstream
