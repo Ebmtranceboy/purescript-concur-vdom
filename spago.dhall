@@ -2,7 +2,7 @@
 Welcome to a Spago project!
 You can edit this file as you like.
 -}
-{ name = "concur-react"
+{ name = "my-project"
 , dependencies =
   [ "aff"
   , "arrays"
@@ -11,9 +11,11 @@ You can edit this file as you like.
   , "console"
   , "foldable-traversable"
   , "free"
+  , "geometry-plane"
   , "halogen-vdom"
   , "nonempty"
   , "profunctor-lenses"
+  , "sparse-polynomials"
   , "tailrec"
   , "web-dom"
   , "web-html"

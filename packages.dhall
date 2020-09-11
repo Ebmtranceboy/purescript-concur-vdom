@@ -31,28 +31,24 @@ Purpose:
     the package set's repo
 
 Syntax:
-Replace the overrides' "{=}" (an empty record) with the following idea
-The "//" or "⫽" means "merge these two records and
-  when they have the same value, use the one on the right:"
+where `entityName` is one of the following:
+- dependencies
+- repo
+- version
 -------------------------------
-let override =
-  { packageName =
-      upstream.packageName // { updateEntity1 = "new value", updateEntity2 = "new value" }
-  , packageName =
-      upstream.packageName // { version = "v4.0.0" }
-  , packageName =
-      upstream.packageName // { repo = "https://www.example.com/path/to/new/repo.git" }
-  }
+let upstream = --
+in  upstream
+  with packageName.entityName = "new value"
 -------------------------------
 
 Example:
 -------------------------------
-let overrides =
-  { halogen =
-      upstream.halogen // { version = "master" }
-  , halogen-vdom =
-      upstream.halogen-vdom // { version = "v4.0.0" }
-  }
+let upstream = --
+in  upstream
+  with halogen.version = "master"
+  with halogen.repo = "https://example.com/path/to/git/repo.git"
+
+  with halogen-vdom.version = "v4.0.0"
 -------------------------------
 
 ### Additions
@@ -61,50 +57,51 @@ Purpose:
 - Add packages that aren't already included in the default package set
 
 Syntax:
-Replace the additions' "{=}" (an empty record) with the following idea:
+where `<version>` is:
+- a tag (i.e. "v4.0.0")
+- a branch (i.e. "master")
+- commit hash (i.e. "701f3e44aafb1a6459281714858fadf2c4c2a977")
 -------------------------------
-let additions =
-  { "package-name" =
-       mkPackage
-         [ "dependency1"
-         , "dependency2"
-         ]
-         "https://example.com/path/to/git/repo.git"
-         "tag ('v4.0.0') or branch ('master')"
-  , "package-name" =
-       mkPackage
-         [ "dependency1"
-         , "dependency2"
-         ]
-         "https://example.com/path/to/git/repo.git"
-         "tag ('v4.0.0') or branch ('master')"
-  , etc.
-  }
+let upstream = --
+in  upstream
+  with new-package-name =
+    { dependencies =
+       [ "dependency1"
+       , "dependency2"
+       ]
+    , repo =
+       "https://example.com/path/to/git/repo.git"
+    , version =
+        "<version>"
+    }
 -------------------------------
 
 Example:
 -------------------------------
-let additions =
-  { benchotron =
-      mkPackage
-        [ "arrays"
-        , "exists"
-        , "profunctor"
-        , "strings"
-        , "quickcheck"
-        , "lcg"
-        , "transformers"
-        , "foldable-traversable"
-        , "exceptions"
-        , "node-fs"
-        , "node-buffer"
-        , "node-readline"
-        , "datetime"
-        , "now"
-        ]
-        "https://github.com/hdgarrood/purescript-benchotron.git"
-        "v7.0.0"
-  }
+let upstream = --
+in  upstream
+  with benchotron =
+      { dependencies =
+          [ "arrays"
+          , "exists"
+          , "profunctor"
+          , "strings"
+          , "quickcheck"
+          , "lcg"
+          , "transformers"
+          , "foldable-traversable"
+          , "exceptions"
+          , "node-fs"
+          , "node-buffer"
+          , "node-readline"
+          , "datetime"
+          , "now"
+          ]
+      , repo =
+          "https://github.com/hdgarrood/purescript-benchotron.git"
+      , version =
+          "v7.0.0"
+      }
 -------------------------------
 -}
 
@@ -112,7 +109,7 @@ let mkPackage =
       https://raw.githubusercontent.com/purescript/package-sets/psc-0.13.0-20190626/src/mkPackage.dhall sha256:0b197efa1d397ace6eb46b243ff2d73a3da5638d8d0ac8473e8e4a8fc528cf57
 
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.13.6-20200507/packages.dhall sha256:9c1e8951e721b79de1de551f31ecb5a339e82bbd43300eb5ccfb1bf8cf7bbd62
+      https://github.com/purescript/package-sets/releases/download/psc-0.13.8-20200909/packages.dhall sha256:b899488adf6f02a92bbaae88039935bbc61bcba4cf4462f6d915fc3d0e094604
 
 let overrides = { concur-react = ./spago.dhall as Location }
 
@@ -133,4 +130,4 @@ let additions =
             "v0.4.2"
       }
 
-in  upstream // overrides // additions
+in  upstream
