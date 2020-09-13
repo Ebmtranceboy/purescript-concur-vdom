@@ -81,6 +81,9 @@ checked = prop "checked"
 autoFocus :: forall a. Boolean -> Props P.Prop a
 autoFocus = prop "autofocus"
 
+size :: forall a. Int -> Props P.Prop a
+size = prop "size"
+
 dangerouslySetInnerHTML :: forall a. String -> Props P.Prop a
 dangerouslySetInnerHTML = prop "innerHTML"
 
